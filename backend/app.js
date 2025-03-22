@@ -156,8 +156,7 @@ app.post('/generate-stl', (req, res) => {
         }
 
         // Log the OpenSCAD command
-        const openScadCommand = `"C:\\Program Files\\OpenSCAD\\openscad.exe" -o "${outputFilePath}" "${scadFile}"`;
-
+        const openScadCommand = `openscad -o "${outputFilePath}" "${scadFile}"`;
         // Run OpenSCAD to generate STL
         exec(openScadCommand, (error, stdout, stderr) => {
             if (error) {
