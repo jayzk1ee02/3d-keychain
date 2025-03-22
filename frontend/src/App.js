@@ -31,7 +31,7 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3001/generate-stl', formData);
+      const response = await axios.post('http://192.168.70.148:3001/generate-stl', formData);
 
       console.log('Backend response:', response);
 
