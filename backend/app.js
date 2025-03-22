@@ -169,7 +169,7 @@ app.post('/generate-stl', (req, res) => {
             console.log('OpenSCAD STDOUT:', stdout);
 
             // Send the file path for download
-            res.send({ message: 'STL generated successfully', file: outputFileName, });
+            res.send({ message: 'STL generated successfully', filename: outputFileName, });
         });
     });
 });

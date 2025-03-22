@@ -3,6 +3,9 @@ import axios from 'axios';
 import { TextField, Button, MenuItem, Select, FormControl, InputLabel, CircularProgress, Box, Fade, Container } from '@mui/material';
 import './styles.css';  // Import the styles for custom CSS
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
+
 function App() {
   const [formData, setFormData] = useState({
     plateNum: '',
@@ -29,24 +32,25 @@ function App() {
     e.preventDefault();
     setMessage('');
     setLoading(true);
-    setDownloadLink(''); // Clear previous download link
+    setDownloadLink('');
   
     try {
-      const response = await axios.post('http://192.168.70.148:3001/generate-stl', formData);
+      const response = await axios.post(`${apiUrl}/generate-stl`, formData);
       console.log('Backend response:', response);
   
       if (response.data.filename) {
         setMessage('Your STL file is ready!');
-        setDownloadLink(`http://192.168.70.148:3001/download/${response.data.filename}`);
+        setDownloadLink(`${apiUrl}/download/${response.data.filename}`);
+      } else {
+        setMessage('STL generation completed, but no file was returned.');
       }
     } catch (error) {
       console.error('Error generating STL:', error);
-      setMessage('Error generating STL. Please try again.');
+      setMessage(error.response?.data?.message || 'Error generating STL. Please try again.');
     } finally {
       setLoading(false);
     }
   };
-  
   
   return (
     <Box
