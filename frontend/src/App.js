@@ -12,6 +12,7 @@ function App() {
 
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [downloadUrl, setDownloadUrl] = useState('');
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -26,8 +27,9 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Clear previous message before generating a new STL file
+    // Clear previous message and download URL
     setMessage('');
+    setDownloadUrl('');
     setLoading(true);
 
     try {
@@ -37,6 +39,7 @@ function App() {
 
       if (response.data.message) {
         setMessage('Your STL file is ready!');
+        setDownloadUrl(`http://192.168.70.148:3001/download/${response.data.filename}`);
       }
     } catch (error) {
       console.error('Error generating STL:', error);
@@ -146,6 +149,18 @@ function App() {
           <Fade in={!!message} timeout={1000}>
             <Box sx={{ marginTop: 2, textAlign: 'center' }}>
               {message && <h3>{message}</h3>}
+
+              {downloadUrl && (
+                <Button
+                  variant="outlined"
+                  color="success"
+                  href={downloadUrl}
+                  download
+                  sx={{ marginTop: 2 }}
+                >
+                  Download STL
+                </Button>
+              )}
             </Box>
           </Fade>
         </Box>
