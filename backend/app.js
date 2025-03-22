@@ -169,10 +169,25 @@ app.post('/generate-stl', (req, res) => {
             console.log('OpenSCAD STDOUT:', stdout);
 
             // Send the file path for download
-            res.send({ message: 'STL generated successfully', file: `/generated_files/${outputFileName}` });
+            res.send({ message: 'STL generated successfully', file: outputFileName, });
         });
     });
 });
+
+
+// Route to download the generated STL file
+app.get('/download/:filename', (req, res) => {
+    const { filename } = req.params;
+    const filePath = path.join(__dirname, 'generated_files', filename);
+
+    // Check if the file exists
+    if (fs.existsSync(filePath)) {
+        res.download(filePath); // Trigger file download
+    } else {
+        res.status(404).send('File not found');
+    }
+});
+
 
 // Start the server
 const PORT = process.env.PORT || 3001;
