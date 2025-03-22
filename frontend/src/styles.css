@@ -1,0 +1,62 @@
+/* styles.css */
+
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1, h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: green;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+select {
+  width: 100%;
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Style the container */
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+input, select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+button {
+  padding: 15px;
+  font-size: 16px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+button:active {
+  background-color: #303f9f;
+}
